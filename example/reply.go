@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/daneharrigan/hipchat"
+	"github.com/micro/hipchat"
 )
 
 func main() {

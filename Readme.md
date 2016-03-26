@@ -16,7 +16,7 @@ Hipchat treats the "bot" resource differently from any other resource connected 
 package main
 
 import (
-	"github.com/daneharrigan/hipchat"
+	"github.com/micro/hipchat"
 )
 
 func main() {
@@ -39,5 +39,5 @@ func main() {
 }
 ```
 
-[1]: https://github.com/daneharrigan/hipchat/tree/master/example
-[2]: http://godoc.org/github.com/daneharrigan/hipchat
+[1]: https://github.com/micro/hipchat/tree/master/example
+[2]: http://godoc.org/github.com/micro/hipchat

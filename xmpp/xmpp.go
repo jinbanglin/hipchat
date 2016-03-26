@@ -146,6 +146,10 @@ func (c *Conn) KeepAlive() {
 	fmt.Fprintf(c.outgoing, " ")
 }
 
+func (c *Conn) Close() error {
+	return c.outgoing.Close()
+}
+
 func Dial(host string) (*Conn, error) {
 	c := new(Conn)
 	outgoing, err := net.Dial("tcp", host+":5222")

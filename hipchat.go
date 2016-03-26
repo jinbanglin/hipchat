@@ -2,9 +2,10 @@ package hipchat
 
 import (
 	"errors"
+	"fmt"
 	"time"
 
-	"github.com/daneharrigan/hipchat/xmpp"
+	"github.com/micro/hipchat/xmpp"
 )
 
 const (
@@ -90,6 +91,10 @@ func NewClientWithServerInfo(user, pass, resource, host, conf string) (*Client, 
 
 	go c.listen()
 	return c, nil
+}
+
+func (c *Client) Close() error {
+	return c.connection.Close()
 }
 
 // Messages returns a read-only channel of Message structs. After joining a
@@ -210,6 +215,7 @@ func (c *Client) listen() {
 			}
 		case "message" + xmpp.NsJabberClient:
 			attr := xmpp.ToMap(element.Attr)
+			fmt.Printf("got %+v\n", attr)
 			if attr["type"] != "groupchat" {
 				continue
 			}
