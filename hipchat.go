@@ -36,6 +36,7 @@ type Message struct {
 	From        string
 	To          string
 	Body        string
+	Type        string
 	MentionName string
 }
 
@@ -216,13 +217,11 @@ func (c *Client) listen() {
 		case "message" + xmpp.NsJabberClient:
 			attr := xmpp.ToMap(element.Attr)
 			fmt.Printf("got %+v\n", attr)
-			if attr["type"] != "groupchat" {
-				continue
-			}
 
 			c.receivedMessage <- &Message{
 				From: attr["from"],
 				To:   attr["to"],
+				Type: attr["type"],
 				Body: c.connection.Body(),
 			}
 		}
