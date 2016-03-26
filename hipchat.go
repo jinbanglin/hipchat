@@ -2,7 +2,6 @@ package hipchat
 
 import (
 	"errors"
-	"fmt"
 	"time"
 
 	"github.com/micro/hipchat/xmpp"
@@ -216,7 +215,11 @@ func (c *Client) listen() {
 			}
 		case "message" + xmpp.NsJabberClient:
 			attr := xmpp.ToMap(element.Attr)
-			fmt.Printf("got %+v\n", attr)
+
+			// received an invite?
+			if len(attr["type"]) == 0 && attr["to"] == c.Id+"/"+c.Resource {
+				attr["type"] = "join_groupchat"
+			}
 
 			c.receivedMessage <- &Message{
 				From: attr["from"],
