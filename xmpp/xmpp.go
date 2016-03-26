@@ -25,6 +25,7 @@ const (
 	xmlIqSet       = "<iq type='set' id='%s'><query xmlns='%s'><username>%s</username><password>%s</password><resource>%s</resource></query></iq>"
 	xmlIqGet       = "<iq from='%s' to='%s' id='%s' type='get'><query xmlns='%s'/></iq>"
 	xmlPresence    = "<presence from='%s'><show>%s</show></presence>"
+	xmlMessage     = "<message from='%s' id='%s' to='%s' type='chat'><body>%s</body></message>"
 	xmlMUCPresence = "<presence id='%s' to='%s' from='%s'><x xmlns='%s'/></presence>"
 	xmlMUCMessage  = "<message from='%s' id='%s' to='%s' type='groupchat'><body>%s</body></message>"
 )
@@ -128,6 +129,10 @@ func (c *Conn) Query() *query {
 
 func (c *Conn) Presence(jid, pres string) {
 	fmt.Fprintf(c.outgoing, xmlPresence, jid, pres)
+}
+
+func (c *Conn) Send(to, from, body string) {
+	fmt.Fprintf(c.outgoing, xmlMessage, from, id(), to, html.EscapeString(body))
 }
 
 func (c *Conn) MUCPresence(roomId, jid string) {

@@ -131,6 +131,12 @@ func (c *Client) Say(roomId, name, body string) {
 	c.connection.MUCSend(roomId, c.Id+"/"+name, body)
 }
 
+// PM accepts a room id, the name of the client in the room, and the message
+// body and sends the message to the HipChat room.
+func (c *Client) PM(roomId, name, body string) {
+	c.connection.Send(roomId, c.Id+"/"+name, body)
+}
+
 // KeepAlive is meant to run as a goroutine. It sends a single whitespace
 // character to HipChat every 60 seconds. This keeps the connection from
 // idling after 150 seconds.
