@@ -137,6 +137,11 @@ func (c *Client) PM(roomId, name, body string) {
 	c.connection.Send(roomId, c.Id+"/"+name, body)
 }
 
+// Ping allows KeepAlive to be used independently
+func (c *Client) Ping() {
+	c.connection.KeepAlive()
+}
+
 // KeepAlive is meant to run as a goroutine. It sends a single whitespace
 // character to HipChat every 60 seconds. This keeps the connection from
 // idling after 150 seconds.
