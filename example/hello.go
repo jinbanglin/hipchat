@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/micro/hipchat"
+	"github.com/jinbanglin/hipchat"
 )
 
 func main() {

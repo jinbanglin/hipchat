@@ -4,7 +4,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/micro/hipchat/xmpp"
+	"github.com/jinbanglin/hipchat/xmpp"
 )
 
 const (
